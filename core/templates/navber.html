@@ -1,0 +1,81 @@
+
+<style>
+    /* Custom Styles */
+    .animated-link {
+        font-size: 2rem; /* Adjust the text size as needed */
+        background: linear-gradient(45deg, #FF7E5F, #feb47b); /* Gradient colors */
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-style: italic;
+        display: inline-block;
+        transition: background-position 0.3s ease;
+        position: relative;
+    }
+
+    .animated-link:hover {
+        background-position: 100% 0;
+        color: white; /* Text color on hover */
+    }
+</style>
+
+<nav class="bg-blue-300  p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-white font-bold animated-link">BookWiseHub</a>
+        <div class=''>
+            <a href="{% url "homepage" %} " class="text-white font-bold animated-link">Home</a>
+        
+            <a href="{% url "deposit" %} " class="text-white mx-5 font-bold animated-link">Deposit</a>
+        </div>
+            
+           
+
+        <div class="lg:hidden">
+            <button id="menu-toggle" class="text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+
+        
+        
+        
+           <!-- your template code -->
+
+<div class="hidden lg:flex space-x-4">
+    {% if request.user.is_authenticated %}
+        <p class="text-white py-2 font-bold">{{ request.user.first_name }} {{ request.user.last_name }} Balance: {{ request.user.user_profile.balance }}</p>
+        <a href="{% url 'user_profile' %}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2  px-4 rounded-md">Profile</a>
+        <a href="{% url 'user_logout' %}" class="bg-red-400 hover:bg-red-700 text-white font-bold py-2  px-4 rounded-md">Logout</a>
+    {% else %}
+        <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2  px-4 rounded-md">Sign Up</a>
+        <a href="{% url 'user_login' %}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2  px-4 rounded-md">Login</a>
+    {% endif %}
+</div>
+
+    
+    </div>
+</nav>
+
+<div id="responsive-menu" class="lg:hidden hidden bg-blue-500 text-white p-4">
+
+    {% if request.user.is_authenticated %}
+    <a href="{% url "user_profile" %}" class="text-white">Profile</a>
+    <a href="{% url "user_logout" %}" class="text-white">Logout</a>
+    {% else %}
+    <a href="{% url "register" %}" class="text-white">Sign Up</a>
+    <br>
+    <a href="{% url "user_login" %}" class="text-white">Login</a>
+    {% endif %}
+    
+</div>
+
+
+
+
+
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('responsive-menu').classList.toggle('hidden');
+    });
+</script>
+  

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4 border-b">Book ID</th>
+                <th class="py-2 px-4 border-b">Book Title</th>
+                <th class="py-2 px-4 border-b">Book Image</th>
+                <th class="py-2 px-4 border-b">Borrowing Date</th>
+                <th class="py-2 px-4 border-b">Returned Status</th>
+                <th class="py-2 px-4 border-b">Returned Date</th>
+                <th class="py-2 px-4 border-b">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            {% for borrowed_book in books %}
+               
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ borrowed_book.id }}</td>
+                        <td class="py-2 px-4 border-b">{{ borrowed_book.book.title }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <img src="{{ borrowed_book.book.image_url }}" alt="{{ borrowed_book.book.title }}" class="w-16 h-16 object-cover">
+                        </td>
+                        <td class="py-2 px-4 border-b">{{ borrowed_book.borrowing_date }}</td>
+                        <td class="py-2 px-4 border-b">{{ borrowed_book.returned }}</td>
+                        <td class="py-2 px-4 border-b">{{ borrowed_book.returned_date }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <form method="post" action="{% url 'return_book' borrowed_book.id %}">
+                                {% csrf_token %}
+                                <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md' type="submit">Return Book</button>
+                            </form>
+                            
+                        </td>
+                    </tr>
+            {% endfor %}
+           
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

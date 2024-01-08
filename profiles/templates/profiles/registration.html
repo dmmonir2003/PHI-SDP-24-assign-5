@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="min-h-screen flex items-center justify-center" >
+    <div class="bg-white p-8 rounded shadow  sd:w-96 mx-auto" style='width: 600px;'>
+      <h2 class="text-2xl font-bold mb-6">Create an Account</h2>
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div>
+          <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            Username
+          </label>
+         {{ form.username }}
+          {% if form.username.errors %}
+            <p class="text-red-500 text-sm">{{ form.username.errors.0 }}</p>
+          {% endif %}
+        </div>
+         <!-- First Name -->
+         <div>
+          <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            First Name
+          </label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}
+            <p class="text-red-500 text-sm">{{ form.first_name.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            Last Name
+          </label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}
+            <p class="text-red-500 text-sm">{{ form.last_name.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+
+        <!-- Email -->
+        <div>
+          <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          {{ form.email }}
+          {% if form.email.errors %}
+            <p class="text-red-500 text-sm">{{ form.email.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            Password
+          </label>
+          {{ form.password1 }}
+          {% if form.password1.errors %}
+            <p class="text-red-500 text-sm">{{ form.password1.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium text-gray-700">
+            Confirm Password
+          </label>
+          {{ form.password2 }}
+          {% if form.password2.errors %}
+            <p class="text-red-500 text-sm">{{ form.password2.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+       
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Create Account
+          </button>
+        </div>
+        <p>Have you allready account ? please <a class='font-bold' href="{% url "user_login" %}">Login</a></p>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!-- deposit_money.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mx-auto mt-8">
+    <div class="max-w-md mx-auto bg-white p-8 border rounded-md shadow-lg">
+      <h2 class="text-2xl font-bold mb-6">Deposit Money</h2>
+      
+      <form method="post" action="{% url 'deposit' %}">
+        {% csrf_token %}
+        
+        <div class="mb-4">
+          <label for="id_deposit_amount" class="block text-gray-700 text-sm font-bold mb-2">Deposit Amount</label>
+          <input type="number" name="deposit_amount" id="id_deposit_amount" class="w-full px-4 py-2 border rounded-md" required>
+        </div>
+
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Deposit</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

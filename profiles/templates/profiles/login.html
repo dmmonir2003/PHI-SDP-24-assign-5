@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow sm:w-96 mx-auto" style='width: 600px;'>
+      <h2 class="text-2xl font-bold mb-6">Login Account</h2>
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Username -->
+        {% for field in form.visible_fields %}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+        {{ field.label }}
+    </label>
+            <input class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ field.name }}" id="{{ field.id_for_label }}" type="{{ field.widget_type }}">
+        </div>
+        {% if field.errors %} {% for error in field.errors %}
+        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+        {% endfor %} {% endif %} {% endfor %}
+       
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Login
+          </button>
+        </div>
+        <p>Don't have a account ? please <a class='font-bold' href="{% url "register" %}">Sign up</a></p>
+      </form>
+    </div>
+  </div>
+{% endblock %}
