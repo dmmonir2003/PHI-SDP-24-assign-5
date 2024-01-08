@@ -93,7 +93,7 @@ DATABASES = {
 }
 
 
-
+CSRF_TRUSTED_ORIGINS = ['https://sdp-assign-5.onrender.com','https://*.127.0.0.1']
 
 
 

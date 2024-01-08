@@ -36,12 +36,8 @@ def BorrowBookView(request, bookId):
             messages.error(request,'This book already borrowed !!')
         else:
             messages.error(request, 'Insufficient funds to borrow this book.')
-
-
-
-    
-    book = get_object_or_404(Book, pk=bookId)
-    return render(request, 'book_detail.html', {'book': book})
+            book = get_object_or_404(Book, pk=bookId)
+            return render(request, 'book_detail.html', {'book': book})
 
 
 
